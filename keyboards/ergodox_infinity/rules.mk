@@ -79,11 +79,15 @@ MIDI_ENABLE = no
 RGBLIGHT_ENABLE = no
 
 LCD_DRIVER = st7565
-LCD_WIDTH = 128 
+LCD_WIDTH = 128
 LCD_HEIGHT = 32
 
 LED_DRIVER = is31fl3731c
-LED_WIDTH = 7 
+LED_WIDTH = 7
 LED_HEIGHT = 7
 
 LAYOUTS = ergodox
+
+# new stuff
+# erperimantal and uses a lot of space
+# TERMINAL_ENABLE = yes
