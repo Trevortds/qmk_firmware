@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   OSM(MOD_LSFT),         KC_Z,    KC_X,    KC_C,    KC_V,  KC_B, KC_LPRN,
   KC_LCTL,              KC_LGUI, KC_LGUI, KC_LALT, LOWER,
 
-                                                  KC_MPLY,   TG(_MOUSE),
+                                                  KC_ESC,   TG(_MOUSE),
                                                              KC_LALT,
                                         KC_SPACE,   LOWER,   KC_LGUI,
 
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_RPRN,      KC_N, KC_M,  KC_COMM, KC_DOT,  LT(_MOUSE, KC_SLSH), OSM(MOD_RSFT),
                      RAISE, KC_LEFT, KC_DOWN, KC_UP,               KC_RIGHT,
 
-  KC_ESC, TG(_MOUSE),
+  TG(_NUM), TG(_MOUSE),
   TG(_ADJUST),
   KC_LGUI,  LT(_RAISE, KC_ENTER), KC_SPACE
 ),
