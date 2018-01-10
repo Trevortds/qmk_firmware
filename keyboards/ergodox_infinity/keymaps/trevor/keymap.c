@@ -49,10 +49,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |  Tab   |  Q  |  W  |  E  |  R  |  T  |  [{  |           |  ]}  |  Y  |  U  |  I  |  O  |  P  |   \    |
  * |--------+-----+-----+-----+-----+-----|      |           |      |-----+-----+-----+-----+-----+--------|
  * |NAV/bksp|  A  |  S  |  D  |  F  |  G  |------|           |------|  H  |  J  |  K  |  L  |  ;  |   '"   |
- * |--------+-----+-----+-----+-----+-----|  L1  |           |  L1  |-----+-----+-----+-----+-----+--------|
+ * |--------+-----+-----+-----+-----+-----|  (   |           |   )  |-----+-----+-----+-----+-----+--------|
  * |Shift/( |  Z  |  X  |  C  |  V  |  B  |      |           |      |  N  |  M  |  ,  |  .  |mou//|Shift/) |
  * `--------+-----+-----+-----+-----+------------'           `------------+-----+-----+-----+-----+--------'
- *   | Ctrl |Ctrl | Alt |LGUI |Lower|                                     |Raise|Left |Down | Up  |Right |
+ *   | Ctrl |LGUI |LGUI | ALT |Lower|                                     |Raise|Left |Down | Up  |Right |
  *   `------------------------------'                                     `------------------------------'
  *                                   ,------------.          ,------------.
  *                                   |Play |Mouse |          | Num  |Mouse|
@@ -67,8 +67,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,               KC_1,    KC_2,    KC_3,    KC_4,  KC_5, KC_ESC,
   KC_TAB,               KC_Q,    KC_W,    KC_E,    KC_R,  KC_T, KC_LBRACKET,
   LT(_NAV,KC_BSPACE),   KC_A,    KC_S,    KC_D,    KC_F,  KC_G,
-  KC_LSPO,              KC_Z,    KC_X,    KC_C,    KC_V,  KC_B, KC_LPRN,
-  KC_LCTL,              KC_LCTL, KC_LALT, KC_LGUI, LOWER,
+  OSM(KC_LSFT),         KC_Z,    KC_X,    KC_C,    KC_V,  KC_B, KC_LPRN,
+  KC_LCTL,              KC_LGUI, KC_LGUI, KC_LALT, LOWER,
 
                                                   KC_MPLY,   TG(_MOUSE),
                                                              KC_LALT,
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   TG(_NUM),     KC_6, KC_7,  KC_8,    KC_9,    KC_0,                KC_EQUAL,
   KC_RBRACKET, KC_Y, KC_U,  KC_I,    KC_O,    KC_P,                KC_BSLS,
                KC_H, KC_J,  KC_K,    KC_L,    KC_SCOLON,           LT(_NAV, KC_QUOTE),
-  KC_RPRN,      KC_N, KC_M,  KC_COMM, KC_DOT,  LT(_MOUSE, KC_SLSH), KC_RSPC,
+  KC_RPRN,      KC_N, KC_M,  KC_COMM, KC_DOT,  LT(_MOUSE, KC_SLSH), OSM(KC_RSFT),
                      RAISE, KC_LEFT, KC_DOWN, KC_UP,               KC_RIGHT,
 
   TG(_NUM), TG(_MOUSE),
@@ -362,23 +362,23 @@ _+{}(
 ),
 
 /* Keymap 2: arrow and navigation keys
- *
+ * Imitate my old pok3r layout
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      | Lclk | MsUp | Rclk |Wh Up |      |           |      |      |      |      |      |      |        |
+ * |        |      | Lclk | MsUp | Rclk |Wh Up |      |           |      |      |      |  UP  |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght|Wh Dn |------|           |------|      |      |      |      |      |  Play  |
+ * |        |      |MsLeft|MsDown|MsRght|Wh Dn |------|           |------| HOME | LEFT | DOWN | RIGHT|      | DELETE |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
+ * |  SHIFT |      |      |      |      |      |      |           |      | END  |      | Prev | Next |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |VolUp |VolDn | Mute |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                      ,-------------.           ,-------------.
  *                                      |      |      |           |      |      |
  *                               ,------|------|------|           |------+------+------.
- *                               |      |      |      |           |      |Brwser|Brwser|
- *                               | Lclk | Rclk |------|           |------|Back  |Fwd   |
+ *                               |      |      |      |           |      |Brwser|      |
+ *                               | Lclk | Rclk |------|           |------|Back  |SPACE |
  *                               |      |      |      |           |      |      |      |
  *                               `--------------------'           `--------------------'
  */
@@ -388,7 +388,7 @@ _+{}(
   _______, _______, _______, _______, _______, _______, _______,
   _______, _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, _______,
   _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,
-  _______, _______, KC_WH_L, KC_BTN3, KC_WH_R, _______, TO(_GAME),
+  KC_LSFT, _______, KC_WH_L, KC_BTN3, KC_WH_R, _______, _______,
   _______, _______, _______, _______, _______,
 
                                        _______, _______,
@@ -396,15 +396,15 @@ _+{}(
                               KC_BTN1, KC_BTN2, KC_WH_U,
 
   // right hand
-  _______,   _______, _______, _______, _______, _______, _______,
-  _______,   _______, _______, _______, _______, _______, _______,
-             _______, _______, _______, _______, _______, KC_MPLY,
-  TO(_GAME), _______, _______, KC_MPRV, KC_MNXT, _______, _______,
-                      KC_VOLU, KC_VOLD, KC_MUTE, _______, _______,
+  _______,   _______, _______, _______,  _______, _______, _______,
+  _______,   _______, _______,   KC_UP,  _______, _______, _______,
+             KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, _______,  KC_DEL,
+  _______,    KC_END, _______, KC_MPRV,  KC_MNXT, _______, _______,
+                      KC_VOLU, KC_VOLD,  KC_MUTE, _______, _______,
 
   _______, _______,
   _______,
-  _______, KC_WBAK, KC_WFWD
+  _______, KC_WBAK, KC_BSPACE
 ),
 
 /* Keymap 2: GAME
