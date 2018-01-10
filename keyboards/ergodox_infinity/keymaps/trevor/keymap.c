@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | Ctrl |LGUI |LGUI | ALT |Lower|                                     |Raise|Left |Down | Up  |Right |
  *   `------------------------------'                                     `------------------------------'
  *                                   ,------------.          ,------------.
- *                                   |Play |Mouse |          | Num  |Mouse|
+ *                                   |Esc  |Mouse |          | Num  |Mouse|
  *                              ,----|-----|------|          |------+-----+-----.
  *                              |    |     | Alt  |          | Alt  |ENTER|     |
  *                              | SPC|LOWER|------|          |------|RAISE|Space|
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_RPRN,      KC_N, KC_M,  KC_COMM, KC_DOT,  LT(_MOUSE, KC_SLSH), OSM(MOD_RSFT),
                      RAISE, KC_LEFT, KC_DOWN, KC_UP,               KC_RIGHT,
 
-  TG(_NUM), TG(_MOUSE),
+  KC_ESC, TG(_MOUSE),
   TG(_ADJUST),
   KC_LGUI,  LT(_RAISE, KC_ENTER), KC_SPACE
 ),
