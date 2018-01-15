@@ -44,13 +44,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic QWERTY layer
  *
  * ,---------------------------------------------.           ,---------------------------------------------.
- * |   `    |  1  |  2  |  3  |  4  |  5  | Esc  |           | Num  |  6  |  7  |  8  |  9  |  0  |   =    |
+ * |   `    |  1  |  2  |  3  |  4  |  5  | Esc  |           | Num  |  6  |  7  |  8  |  9  |  0  |   -    |
  * |--------+-----+-----+-----+-----+------------|           |------+-----+-----+-----+-----+-----+--------|
  * |  Tab   |  Q  |  W  |  E  |  R  |  T  |  [{  |           |  ]}  |  Y  |  U  |  I  |  O  |  P  |   \    |
  * |--------+-----+-----+-----+-----+-----|      |           |      |-----+-----+-----+-----+-----+--------|
  * |NAV/bksp|  A  |  S  |  D  |  F  |  G  |------|           |------|  H  |  J  |  K  |  L  |  ;  |   '"   |
  * |--------+-----+-----+-----+-----+-----|  (   |           |   )  |-----+-----+-----+-----+-----+--------|
- * |Shift/( |  Z  |  X  |  C  |  V  |  B  |      |           |      |  N  |  M  |  ,  |  .  |mou//|Shift/) |
+ * |Shift   |  Z  |  X  |  C  |  V  |  B  |      |           |      |  N  |  M  |  ,  |  .  |mou//|Shift   |
  * `--------+-----+-----+-----+-----+------------'           `------------+-----+-----+-----+-----+--------'
  *   | Ctrl |LGUI |LGUI | ALT |Lower|                                     |Raise|Left |Down | Up  |Right |
  *   `------------------------------'                                     `------------------------------'
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         KC_SPACE,   LOWER,   KC_LGUI,
 
   // right hand
-  TG(_NUM),     KC_6, KC_7,  KC_8,    KC_9,    KC_0,                KC_EQUAL,
+  TG(_NUM),     KC_6, KC_7,  KC_8,    KC_9,    KC_0,                KC_MINS,
   KC_RBRACKET, KC_Y, KC_U,  KC_I,    KC_O,    KC_P,                KC_BSLS,
                KC_H, KC_J,  KC_K,    KC_L,    KC_SCOLON,           LT(_NAV, KC_QUOTE),
   KC_RPRN,      KC_N, KC_M,  KC_COMM, KC_DOT,  LT(_MOUSE, KC_SLSH), OSM(MOD_RSFT),
@@ -393,7 +393,7 @@ _+{}(
 
                                        _______, _______,
                                                 KC_WH_D,
-                              KC_BTN1, KC_BTN2, KC_WH_U,
+                            KC_BSPACE, _______, KC_WH_U,
 
   // right hand
   _______,   _______, _______, _______,  _______, _______, _______,
