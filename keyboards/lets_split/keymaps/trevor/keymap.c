@@ -17,6 +17,7 @@ extern keymap_config_t keymap_config;
 #define _DVORAK 2
 #define _LOWER 3
 #define _RAISE 4
+#define _NAV 5
 #define _ADJUST 16
 
 enum custom_keycodes {
@@ -26,6 +27,7 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
+  NAV
 };
 
 // Fillers to make layering more clear
