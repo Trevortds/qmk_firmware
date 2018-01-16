@@ -38,16 +38,19 @@ enum custom_keycodes {
 #define BAKNAV LT(_NAV, KC_BSPC)
 #define QUONAV LT(_NAV, KC_QUOT)
 
-#define W1 LGUI(kc_1)
-#define W2 LGUI(kc_2)
-#define W3 LGUI(kc_3)
-#define W4 LGUI(kc_4)
-#define W5 LGUI(kc_5)
-#define W6 LGUI(kc_6)
-#define W7 LGUI(kc_7)
-#define W8 LGUI(kc_8)
-#define W9 LGUI(kc_9)
-#define W10 LGUI(kc_0)
+// navigation layer keys
+#define W1 LGUI(KC_1)
+#define W2 LGUI(KC_2)
+#define W3 LGUI(KC_3)
+#define W4 LGUI(KC_4)
+#define W5 LGUI(KC_5)
+#define W6 LGUI(KC_6)
+#define W7 LGUI(KC_7)
+#define W8 LGUI(KC_8)
+#define W9 LGUI(KC_9)
+#define W10 LGUI(KC_0)
+#define TERM LGUI(KC_ENT)
+#define OPEN LGUI(KC_O)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -83,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_COLEMAK] = KEYMAP( \
   _______,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN, _______, \
-  _______,   KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT, \
+  _______,   KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O, _______, \
   _______,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, _______, \
   _______,_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
 ),
@@ -144,20 +147,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Nav
  * ,-----------------------------------------------------------------------------------.
- * | ESC  |  W1  |  W2  |  W3  |  W4  |  W5  |   ^  |   &  |   *  |   (  |   )  | Del  |
+ * | ESC  |  W1  |  W2  |  W3  |  W4  |  W5  |      |      |  UP  |      |      | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |  W6  |  W7  |  W8  |  W9  |  W10 |  F6  |   _  |   +  |     |    \  |  |   |
+ * |      |  W6  |  W7  |  W8  |  W9  |  W10 |      | LEFT | DOWN |RIGHT | Open |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |  F12 |ISO ~ |ISO | |      |      |Enter |
+ * |      |      |      |      |      |      |      |      |      |      |      | TERM |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |   backspace |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |   backspace |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_NAV] = KEYMAP( \
-   KC_ESC,      W1,      W2,      W3,      W4,      W5, _______, _______, _______, _______, _______, KC_DEL, \
-  _______,      W6,      W7,      W8,      W9,     W10, _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_ENT, \
-  _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, _______, _______, _______, _______, _______ \
+   KC_ESC,      W1,      W2,      W3,      W4,      W5, _______, _______,   KC_UP, _______, _______,  KC_DEL, \
+  _______,      W6,      W7,      W8,      W9,     W10, _______, KC_LEFT, KC_DOWN, KC_RGHT,    OPEN, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,    TERM, \
+  _______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, _______, _______, _______, _______ \
 ),
 
 /* Adjust (Lower + Raise)

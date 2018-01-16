@@ -57,6 +57,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 40
 
 #define PREVENT_STUCK_MODIFIERS
+#define PERMISSIVE_HOLD
 
 
 #endif
