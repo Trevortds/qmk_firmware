@@ -52,6 +52,7 @@ enum custom_keycodes {
 #define W10 LGUI(KC_0)
 #define TERM LGUI(KC_ENT)
 #define OPEN LGUI(KC_O)
+#define LOCK LGUI(KC_L)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
