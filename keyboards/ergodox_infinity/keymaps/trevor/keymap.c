@@ -31,6 +31,37 @@ enum custom_keycodes {
     RGB_SLD
 };
 
+//TD Declarations
+enum {
+RZEALT = 0,
+// PRN,
+// EGT,
+// HRD,
+// XRD,
+// DSH,
+// ESC,
+// EQE,
+// PGN,
+// HND,
+// COD,
+// UND,
+// F11,
+// F12,
+// F13,
+// F14,
+// F15,
+// F16,
+// F17,
+// F18,
+// F19,
+// F20,
+// //unicode_inputctl
+// LINUX,
+// WIN,
+// WINSH,
+// OSX,
+};
+
 // navigation layer keys
 #define W1 LGUI(KC_1)
 #define W2 LGUI(KC_2)
@@ -61,6 +92,7 @@ enum custom_keycodes {
 // TG(layer) toggle layer
 // OSM(mod) hold mod for one keypress
 // OSL(layer) hold layer for one keypress
+// MT(mod, kc) hold: mod tap: key
 
 
 // make bottom left button on right thumb cluster a leader key
@@ -83,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                   ,------------.          ,------------.
  *                                   |Esc  |Mouse |          | Num  |Mouse|
  *                              ,----|-----|------|          |------+-----+-----.
- *                              |    |     | Alt  |          | Alt  |ENTER|     |
+ *                              |    |     | Adj  |          | Adj  |ENTER|     |
  *                              | SPC|LOWER|------|          |------|RAISE|Space|
  *                              |    |     | LGUI |          | LGUI |     |     |
  *                              `-----------------'          `------------------'
@@ -97,23 +129,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LCTL,              KC_LGUI, KC_LGUI, KC_LALT, LOWER,
 
                                                   KC_ESC,   TG(_MOUSE),
-                                                             KC_LALT,
-                                        KC_SPACE,   LOWER,   KC_LGUI,
+                                                            TG(_ADJUST),
+                                        KC_SPACE, KC_LGUI,   KC_LGUI,
 
   // right hand
-  TG(_NUM),     KC_6, KC_7,  KC_8,    KC_9,    KC_0,                KC_MINS,
-  KC_RBRACKET, KC_Y, KC_U,  KC_I,    KC_O,    KC_P,                KC_BSLS,
-               KC_H, KC_J,  KC_K,    KC_L,    KC_SCOLON,           LT(_NAV, KC_QUOTE),
-  KC_RPRN,      KC_N, KC_M,  KC_COMM, KC_DOT,  LT(_MOUSE, KC_SLSH), OSM(MOD_RSFT),
-                     RAISE, KC_LEFT, KC_DOWN, KC_UP,               KC_RIGHT,
+  TG(_NUM),     KC_6,          KC_7,     KC_8,    KC_9,                  KC_0,      KC_MINS,
+  KC_RBRACKET,  KC_Y,          KC_U,     KC_I,    KC_O,                  KC_P,      KC_BSLS,
+                KC_H,          KC_J,     KC_K,    KC_L,              KC_SCOLON,   LT(_NAV, KC_QUOTE),
+  KC_RPRN,      KC_N,          KC_M,  KC_COMM,   KC_DOT,   LT(_MOUSE, KC_SLSH), OSM(MOD_RSFT),
+                              RAISE, KC_LEFT,  KC_DOWN,                 KC_UP,      KC_RIGHT,
 
   TG(_NUM), TG(_MOUSE),
   TG(_ADJUST),
-  KC_LGUI,  LT(_RAISE, KC_ENTER), KC_SPACE
+  KC_LGUI,  MT(MOD_LGUI, KC_ENTER), KC_SPACE
 ),
 
 /* Keymap 0: Basic Dvorak layer
- *
+ *TD(RZEALT)
  * ,---------------------------------------------.           ,--------------------------------------------.
  * |        |     |     |     |     |     |      |           |      |     |     |     |     |     |        |
  * |--------+-----+-----+-----+-----+------------|           |------+-----+-----+-----+-----+-----+--------|
@@ -527,6 +559,95 @@ _+{}(
 ),
 
 };
+
+
+//---------------------------------------------------------------------------------tap dance
+
+
+
+
+enum {
+  SINGLE_TAP = 1,
+  SINGLE_HOLD = 2,
+  DOUBLE_TAP = 3,
+  DOUBLE_HOLD = 4,
+  DOUBLE_SINGLE_TAP = 5 //send SINGLE_TAP twice - NOT DOUBLE_TAP
+  // Add more enums here if you want for triple, quadruple, etc.
+};
+
+
+typedef struct {
+  bool is_press_action;
+  int state;
+} tap;
+
+
+int cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) {
+    //If count = 1, and it has been interrupted - it doesn't matter if it is pressed or not: Send SINGLE_TAP
+    if (state->interrupted || state->pressed==0) return SINGLE_TAP;
+    else return SINGLE_HOLD;
+  }
+  //If count = 2, and it has been interrupted - assume that user is trying to type the letter associated
+  //with single tap. In example below, that means to send `xx` instead of `Escape`.
+  else if (state->count == 2) {
+    if (state->interrupted) return DOUBLE_SINGLE_TAP;
+    else if (state->pressed) return DOUBLE_HOLD;
+    else return DOUBLE_TAP;
+  }
+  else return 6; //magic number. At some point this method will expand to work for more presses
+}
+
+
+
+static tap raisealt_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void raisealt(qk_tap_dance_state_t *state, void *user_data)
+{
+  raisealt_state.state = cur_dance(state);
+  switch (raisealt_state.state) {
+    case SINGLE_TAP: break;
+
+  }
+}
+
+
+void raisealt_reset(qk_tap_dance_state_t *state, void *user_data)
+{
+
+}
+
+
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [RZEALT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, raisealt, raisealt_reset)//TO(_RAISE), KC_RALT)
+ // [VOM] = ACTION_TAP_DANCE_DOUBLE(KC_VOLD, KC_MUTE),
+ // [PRN] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN),
+ // [EGT] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR),
+ // [HRD] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
+ // [DSH] = ACTION_TAP_DANCE_DOUBLE(KC_NDSH, KC_MDSH),
+ // [ESC] = ACTION_TAP_DANCE_DOUBLE(KC_ESC,  LALT(KC_F4)),
+ // [EQE] = ACTION_TAP_DANCE_DOUBLE(KC_EQL,  KC_ENT),
+ // [UND] = ACTION_TAP_DANCE_DOUBLE(KC_Z,    LCTL(KC_Z)),
+ // [PGN] = ACTION_TAP_DANCE_DOUBLE(KC_PGDN, KC_PGUP),
+ // [HND] = ACTION_TAP_DANCE_DOUBLE(KC_HOME, KC_END),
+ // [COD] = ACTION_TAP_DANCE_DOUBLE(KC_COMM, KC_DOT),
+ // [F11] = ACTION_TAP_DANCE_DOUBLE(KC_F1,   KC_F11),
+ // [F12] = ACTION_TAP_DANCE_DOUBLE(KC_F2,   KC_F12),
+ // [F13] = ACTION_TAP_DANCE_DOUBLE(KC_F3,   KC_F13),
+ // [F14] = ACTION_TAP_DANCE_DOUBLE(KC_F4,   KC_F14),
+ // [F15] = ACTION_TAP_DANCE_DOUBLE(KC_F5,   KC_F15),
+ // [F16] = ACTION_TAP_DANCE_DOUBLE(KC_F6,   KC_F16),
+ // [F17] = ACTION_TAP_DANCE_DOUBLE(KC_F7,   KC_F17),
+ // [F18] = ACTION_TAP_DANCE_DOUBLE(KC_F8,   KC_F18),
+ // [F19] = ACTION_TAP_DANCE_DOUBLE(KC_F9,   KC_F19),
+ // [F20] = ACTION_TAP_DANCE_DOUBLE(KC_F10,  KC_F20),
+};
+
+//-------------------------------------------------------------------------------- stuff from xd lets split
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {

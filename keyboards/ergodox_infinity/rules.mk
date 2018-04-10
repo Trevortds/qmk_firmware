@@ -91,3 +91,6 @@ LAYOUTS = ergodox
 # new stuff
 # erperimantal and uses a lot of space
 # TERMINAL_ENABLE = yes
+
+TAP_DANCE_ENABLE = yes
+
