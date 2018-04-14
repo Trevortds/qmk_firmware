@@ -50,6 +50,16 @@ enum custom_keycodes {
 #define W8 LGUI(KC_8)
 #define W9 LGUI(KC_9)
 #define W10 LGUI(KC_0)
+#define W11 LALT(LGUI(KC_1))
+#define W12 LALT(LGUI(KC_2))
+#define W13 LALT(LGUI(KC_3))
+#define W14 LALT(LGUI(KC_4))
+#define W15 LALT(LGUI(KC_5))
+#define W16 LALT(LGUI(KC_6))
+#define W17 LALT(LGUI(KC_7))
+#define W18 LALT(LGUI(KC_8))
+#define W19 LALT(LGUI(KC_9))
+#define W20 LALT(LGUI(KC_0))
 #define TERM LGUI(KC_ENT)
 #define OPEN LGUI(KC_O)
 #define LOCK LGUI(KC_L)
@@ -143,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = KEYMAP( \
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,            KC_7,    KC_8,     KC_9,    KC_0,  KC_ESC, \
   KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,        KC_MINS,  KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, \
-  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, OSM(MOD_RALT), KC_NUBS,  _______, _______,  KC_ENT, \
+  _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, OSM(MOD_RALT), KC_MPRV,  _______, _______,  KC_ENT, \
   _______, _______, _______, _______, _______, _______, _______,      _______, KC_MNXT,  KC_VOLD, KC_VOLU, KC_MPLY \
 ),
 
@@ -153,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |  W6  |  W7  |  W8  |  W9  |  W10 | HOME | LEFT | DOWN |RIGHT | Open |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      | END  |      |      |      |      | TERM |
+ * |      | W11  | W12  | W13  | W14  | W15  | END  |      |      |      |      | TERM |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |   backspace |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -161,7 +171,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NAV] = KEYMAP( \
    KC_ESC,      W1,      W2,      W3,      W4,      W5, _______,    LOCK,   KC_UP, _______, _______,  KC_DEL, \
   _______,      W6,      W7,      W8,      W9,     W10, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT,    OPEN, _______, \
-  _______, _______, _______, _______, _______, _______,  KC_END, _______, _______, _______, _______,    TERM, \
+  _______,     W11,     W12,     W13,     W14,     W15,  KC_END, _______, _______, _______, _______,    TERM, \
   _______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, _______, _______, _______, _______ \
 ),
 
