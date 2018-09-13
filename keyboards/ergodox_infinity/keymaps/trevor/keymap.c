@@ -151,7 +151,7 @@ enum progmem_ids {
 #define W20 LALT(LGUI(KC_0))
 #define TERM LGUI(KC_ENT)
 #define OPEN LGUI(KC_O)
-#define LOCK LGUI(KC_U)
+#define LOCK LGUI(KC_L)
 
 // LT(layer, kc) hold: layer tap: key
 // TO(layer) hold: layer
