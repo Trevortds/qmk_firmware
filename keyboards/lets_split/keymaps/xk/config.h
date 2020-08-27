@@ -43,7 +43,6 @@ the Free Software Foundation, either version 2 of the License, or
 >>>>>>> initial commit
 
 
-#define PREVENT_STUCK_MODIFIERS
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
 
